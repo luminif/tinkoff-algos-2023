@@ -21,23 +21,23 @@ void solve() {
 
     auto f = [&](int i, int j, int val) -> void {
         if (a[i][j] != -1) return;
-        a[i][j] = val;
+        a[i][j] = val ^ 1;
 
         for (int k = 1; k < max(n, m); k++) {
-            if (i + k < n && j + k < m) a[i + k][j + k] = val ^ 1;
+            if (i + k < n && j + k < m) a[i + k][j + k] = val;
         }
 
         for (int k = 1; i + k < n; k++) {
-            a[i + k][j] = val ^ 1;
+            a[i + k][j] = val;
         }
 
         for (int k = 1; j + k < m; j++) {
-            a[i][j + k] = val ^ 1;
+            a[i][j + k] = val;
         }
     };
 
     rep(i, n) rep(j, m) {
-        f(i, j, 0);
+        f(i, j, 1);
     }
 
     cout << (a.back().back() ? 1 : 2);
